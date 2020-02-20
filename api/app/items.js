@@ -18,13 +18,13 @@ const upload = multer({storage});
 const routerItems =  (connection) => {
 
     router.get('/', async (req, res) => {
-        console.log('hhh');
+
         const items = await connection.query('SELECT * FROM `items`');
         res.send(items)
     });
 
     router.get('/:id', async (req, res) => {
-        console.log('id');
+
         const item = await connection.query('SELECT * FROM `items` WHERE `id` = ?', req.params.id);
         const itemElement = item[0];
         if (!itemElement){
@@ -35,7 +35,7 @@ const routerItems =  (connection) => {
 
 
     router.post('/', upload.single('image'), async (req, res) => {
-        console.log(req.body);
+
         const items = req.body;
         if (req.file) {
             items.image = req.file.filename
@@ -52,7 +52,7 @@ const routerItems =  (connection) => {
 
     });
     router.delete('/:id', async (req, res) => {
-        console.log('id');
+
        const item = await connection.query('DELETE FROM `items` WHERE `id` = ?', req.params.id);
         const itemElement = item[0];
         if (!itemElement){
